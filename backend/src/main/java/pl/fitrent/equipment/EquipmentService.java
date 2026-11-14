@@ -3,6 +3,7 @@ package pl.fitrent.equipment;
 import org.springframework.stereotype.Service;
 import pl.fitrent.category.Category;
 import pl.fitrent.category.CategoryRepository;
+import pl.fitrent.common.exception.NotFoundException;
 
 import java.util.List;
 
@@ -29,14 +30,14 @@ public class EquipmentService {
 
     public EquipmentResponse getById(Long id) {
         Equipment equipment = equipmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Equipment not found"));
+                .orElseThrow(() -> new NotFoundException("Equipment not found"));
 
         return EquipmentResponse.fromEntity(equipment);
     }
 
     public EquipmentResponse create(EquipmentRequest request) {
         Category category = categoryRepository.findById(request.categoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new NotFoundException("Category not found"));
 
         Equipment equipment = new Equipment(
                 request.name(),
@@ -55,10 +56,10 @@ public class EquipmentService {
 
     public EquipmentResponse update(Long id, EquipmentRequest request) {
         Equipment equipment = equipmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Equipment not found"));
+                .orElseThrow(() -> new NotFoundException("Equipment not found"));
 
         Category category = categoryRepository.findById(request.categoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new NotFoundException("Category not found"));
 
         equipment.setName(request.name());
         equipment.setDescription(request.description());
@@ -75,7 +76,7 @@ public class EquipmentService {
 
     public void delete(Long id) {
         Equipment equipment = equipmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Equipment not found"));
+                .orElseThrow(() -> new NotFoundException("Equipment not found"));
 
         equipmentRepository.delete(equipment);
     }
