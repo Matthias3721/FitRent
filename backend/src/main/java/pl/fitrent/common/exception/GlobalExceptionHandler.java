@@ -5,6 +5,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -53,6 +54,18 @@ public class GlobalExceptionHandler {
                 400,
                 "Bad Request",
                 message
+        );
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiError handleDataIntegrityViolation(
+            DataIntegrityViolationException exception
+    ) {
+        return new ApiError(
+                409,
+                "Conflict",
+                "Operation conflicts with existing data"
         );
     }
 }

@@ -4,10 +4,12 @@ import org.springframework.stereotype.Service;
 import pl.fitrent.category.Category;
 import pl.fitrent.category.CategoryRepository;
 import pl.fitrent.common.exception.NotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class EquipmentService {
 
     private final EquipmentRepository equipmentRepository;

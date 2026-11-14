@@ -6,10 +6,12 @@ import pl.fitrent.equipment.EquipmentRepository;
 import pl.fitrent.common.exception.BadRequestException;
 import pl.fitrent.common.exception.ConflictException;
 import pl.fitrent.common.exception.NotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
