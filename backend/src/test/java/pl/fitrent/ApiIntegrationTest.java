@@ -55,7 +55,7 @@ class ApiIntegrationTest {
                 )
                 .andExpect(status().isOk());
     }
-    
+
     @Test
     void shouldForbidUserFromCreatingEquipment() throws Exception {
         User user = new User(
