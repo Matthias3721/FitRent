@@ -5,6 +5,9 @@ import pl.fitrent.category.Category;
 import pl.fitrent.category.CategoryRepository;
 import pl.fitrent.common.exception.NotFoundException;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -23,11 +26,31 @@ public class EquipmentService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<EquipmentResponse> getAll() {
-        return equipmentRepository.findAll()
-                .stream()
-                .map(EquipmentResponse::fromEntity)
-                .toList();
+    public Page<EquipmentResponse> getAll(
+            String search,
+            Boolean active,
+            int page,
+            int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        String searchValue = search == null ? "" : search;
+
+        Page<Equipment> equipmentPage;
+
+        if (active == null) {
+            equipmentPage = equipmentRepository
+                    .findByNameContainingIgnoreCase(searchValue, pageable);
+        } else {
+            equipmentPage = equipmentRepository
+                    .findByNameContainingIgnoreCaseAndActive(
+                            searchValue,
+                            active,
+                            pageable
+                    );
+        }
+
+        return equipmentPage.map(EquipmentResponse::fromEntity);
     }
 
     public EquipmentResponse getById(Long id) {
