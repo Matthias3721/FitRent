@@ -1,4 +1,3 @@
-@"
 # Java
 backend/target/
 *.class
@@ -7,16 +6,18 @@ backend/target/
 frontend/node_modules/
 frontend/dist/
 
-# Environment
+# Konfiguracja lokalna i sekrety
 .env
+.env.*
+!.env.example
 *.env.local
+*.local.ps1
 
 # IDE
 .idea/
 .vscode/
 *.iml
 
-# OS
+# System
 .DS_Store
 Thumbs.db
-"@ | Out-File -Encoding utf8 .gitignore
