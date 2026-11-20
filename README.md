@@ -368,5 +368,5 @@ Jeśli backend działa w tym terminalu, najpierw zatrzymaj go przez `Ctrl+C`. Zm
 
 ## Demo i wersja do oceny
 
-- **Demo video 3–5 minut:** DO UZUPEŁNIENIA
-- **Ostateczny commit lub tag:** DO UZUPEŁNIENIA
+- **Demo video 3–5 minut:** (https://drive.google.com/file/d/1C4AAiF1g4H7MO8dtsfk1SnL_cS-1niiV/view?usp=sharing)
+- **Ostateczny commit lub tag:** `v1.0-4.0`
